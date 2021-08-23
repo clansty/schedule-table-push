@@ -1,0 +1,30 @@
+name: Task
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * 0'
+
+jobs:
+  daily-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v2
+        name: Setup Python environment
+        with:
+          python-version: '3.x'
+          architecture: 'x64'
+
+      - name: Setup Playwright environment
+        run: |
+          pip install playwright
+          playwright install chromium
+
+      - uses: actions/checkout@v2
+
+      - name: Run the script
+        run: python main.py
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          ONEBOT_API: ${{ secrets.ONEBOT_API }}
+          FORWARD_GROUP: ${{ secrets.FORWARD_GROUP }}
