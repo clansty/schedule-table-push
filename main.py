@@ -8,7 +8,7 @@ import json
 FORWARD_GROUP = os.getenv('FORWARD_GROUP')
 USERNAME = os.getenv('USERNAME')
 PASSWORD = os.getenv('PASSWORD')
-ONEBOT_URL = os.getenv('ONEBOT_URL')
+ONEBOT_API = os.getenv('ONEBOT_API')
 
 
 def run(playwright):
@@ -31,7 +31,7 @@ def run(playwright):
             }
         }
     }
-    rq = requests.post(ONEBOT_URL,
+    rq = requests.post(ONEBOT_API + '/send_group_msg',
                        auth=(USERNAME, PASSWORD),
                        data=json.dumps(post_data))
     print(rq.json())
