@@ -21,6 +21,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - name: Install libraries
+        run: pip install requests
+
       - name: Run the script
         run: python main.py
         env:
