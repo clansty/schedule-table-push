@@ -1,9 +1,9 @@
 import os
-
 from playwright.sync_api import sync_playwright
 import base64
 import requests
 import json
+import time
 
 FORWARD_GROUP = os.getenv('FORWARD_GROUP')
 USERNAME = os.getenv('USERNAME')
@@ -17,6 +17,7 @@ def run(playwright):
     context = browser.new_context(**device)
     page = context.new_page()
     page.goto("https://react-schedule-table.vercel.app/")
+    time.sleep(10)
     screenshot_bytes = page.screenshot(full_page=True)
     page.close()
     context.close()
